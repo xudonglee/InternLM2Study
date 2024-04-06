@@ -251,7 +251,7 @@ R
 
 
 
-`Lagent` 运行 `InternLM2-Chat-7B` 模型**
+## **`Lagent` 运行 `InternLM2-Chat-7B` 模型**
 
 ###  **1 初步介绍 Lagent 相关知识**
 
