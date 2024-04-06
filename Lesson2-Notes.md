@@ -248,3 +248,221 @@ R
 
 这可不敢当，我只要跟唐僧取经，吃香喝辣，过上舒服日子，就是天上的神仙也不如我自在！
 ```
+
+
+
+`Lagent` 运行 `InternLM2-Chat-7B` 模型**
+
+###  **1 初步介绍 Lagent 相关知识**
+
+Lagent 是一个轻量级、开源的基于大语言模型的智能体（agent）框架，支持用户快速地将一个大语言模型转变为多种类型的智能体，并提供了一些典型工具为大语言模型赋能。
+
+Lagent 的特性总结如下：
+
+- 流式输出：提供 stream_chat 接口作流式输出，本地就能演示酷炫的流式 Demo。
+- 接口统一，设计全面升级，提升拓展性，包括：
+    - Model : 不论是 OpenAI API, Transformers 还是推理加速框架 LMDeploy 一网打尽，模型切换可以游刃有余；
+    - Action: 简单的继承和装饰，即可打造自己个人的工具集，不论 InternLM 还是 GPT 均可适配；
+    - Agent：与 Model 的输入接口保持一致，模型到智能体的蜕变只需一步，便捷各种 agent 的探索实现；
+- 文档全面升级，API 文档全覆盖。
+
+
+### **2   配置基础环境（开启 30% A100 ）**
+
+> 该实例毕竟耗资源，需要将原来的开发机关闭，重新创建 50%算力的开发机，再进行
+
+1. 重新开启开发机，输入命令，开启 conda 环境：
+
+```shell
+conda activate demo
+```
+
+2. 打开文件子路径
+
+```shell
+cd /root/demo
+```
+
+3. 使用 git 命令下载 Lagent 相关的代码库
+
+```shell
+git clone https://gitee.com/internlm/lagent.git
+# git clone https://github.com/internlm/lagent.git
+cd /root/demo/lagent
+git checkout 581d9fb8987a5d9b72bb9ebd37a95efd47d479ac
+pip install -e . # 源码安装
+```
+
+
+###  **3. 使用 `Lagent` 运行 `InternLM2-Chat-7B` 模型为内核的智能体**
+
+1. 打开 lagent 路径：
+
+```shell
+cd /root/demo/lagent
+```
+
+
+2. 在 terminal 中输入指令，构造软链接快捷访问方式：
+
+```shell
+ln -s /root/share/new_models/Shanghai_AI_Laboratory/internlm2-chat-7b /root/models/internlm2-chat-7b
+```
+
+3. 修改 `lagent` 路径下 `examples/internlm2_agent_web_demo_hf.py` 文件，并修改对应位置 (71行左右) 代码：
+
+```python
+    def setup_sidebar(self):
+        """Setup the sidebar for model and plugin selection."""
+        # model_name = st.sidebar.selectbox('模型选择：', options=['internlm'])
+        model_name = st.sidebar.text_input('模型名称：', value='internlm2-chat-7b')
+        meta_prompt = st.sidebar.text_area('系统提示词', value=META_CN)
+        da_prompt = st.sidebar.text_area('数据分析提示词', value=INTERPRETER_CN)
+        plugin_prompt = st.sidebar.text_area('插件提示词', value=PLUGIN_CN)
+        model_path = st.sidebar.text_input(
+            '模型路径：', value='/root/models/internlm2-chat-7b')
+```
+
+4. 输入运行命令 - **点开 6006 链接后，大约需要 5 分钟完成模型加载：**
+
+```shell
+streamlit run /root/demo/lagent/examples/internlm2_agent_web_demo_hf.py --server.address 127.0.0.1 --server.port 6006
+
+(demo) root@intern-studio-50051794:~/demo/lagent# streamlit run /root/demo/lagent/examples/internlm2_agent_web_demo_hf.py --server.address 127.0.0.1 --server.port 6006
+
+Collecting usage statistics. To deactivate, set browser.gatherUsageStats to False.
+
+
+  You can now view your Streamlit app in your browser.
+
+  URL: http://127.0.0.1:6006
+
+Special tokens have been added in the vocabulary, make sure the associated word embeddings are fine-tuned or trained.
+Special tokens have been added in the vocabulary, make sure the associated word embeddings are fine-tuned or trained.
+Loading checkpoint shards:  12%|███████▍                                                   | 1/8 [00:04<00:33,  4.72s/it]Special tokens have been added in the vocabulary, make sure the associated word embeddings are fine-tuned or trained.
+Special tokens have been added in the vocabulary, make sure the associated word embeddings are fine-tuned or trained.
+Loading checkpoint shards: 100%|███████████████████████████████████████████████████████████| 8/8 [01:27<00:00, 10.88s/it]
+Loading checkpoint shards: 100%|███████████████████████████████████████████████████████████| 8/8 [01:16<00:00,  9.57s/it]
+Special tokens have been added in the vocabulary, make sure the associated word embeddings are fine-tuned or trained./it]
+Special tokens have been added in the vocabulary, make sure the associated word embeddings are fine-tuned or trained.
+Loading checkpoint shards:  62%|████████████████████████████████████▉                      | 5/8 [00:27<00:16,  5.59s/it]Loading checkpoint shards: 100%|███████████████████████████████████████████████████████████| 8/8 [00:42<00:00,  5.31s/it]
+Special tokens have been added in the vocabulary, make sure the associated word embeddings are fine-tuned or trained.
+Special tokens have been added in the vocabulary, make sure the associated word embeddings are fine-tuned or trained.
+Loading checkpoint shards: 100%|███████████████████████████████████████████████████████████| 8/8 [00:35<00:00,  4.47s/it]
+Special tokens have been added in the vocabulary, make sure the associated word embeddings are fine-tuned or trained.
+Special tokens have been added in the vocabulary, make sure the associated word embeddings are fine-tuned or trained.
+Loading checkpoint shards: 100%|███████████████████████████████████████████████████████████| 8/8 [00:40<00:00,  5.07s/it]
+Special tokens have been added in the vocabulary, make sure the associated word embeddings are fine-tuned or trained.
+Special tokens have been added in the vocabulary, make sure the associated word embeddings are fine-tuned or trained.
+Loading checkpoint shards: 100%|███████████████████████████████████████████████████████████| 8/8 [00:42<00:00,  5.28s/it]
+```
+
+>  需要做本地端口映射，另外打开的网页不要总是刷新，刷新一次需要重新加载一次，当一个进度条完成 8/8时，就是加载完成了
+
+
+5. 打开 [http://127.0.0.1:6006](http://127.0.0.1:6006/) 后，（会有较长的加载时间）勾上数据分析，其他的选项不要选择，进行计算方面的 Demo 对话，即完成本章节实战。键入内容示例：
+
+```shell
+
+请解方程 2*X=1360 之中 X 的结果
+
+当然可以，我将使用Python来解这个方程。
+
+首先，我们将方程2*X=1360转换为Python代码，然后求解X的值。
+
+IPythonInterpreter
+
+`from sympy import symbols, Eq, solve # 定义变量 X = symbols('X') # 创建方程 equation = Eq(2*X, 1360) # 解方程 solution = solve(equation, X) # 输出解 solution`
+
+`[680]`
+
+通过解方程2*X=1360，我们得到X的值为680。因此，方程的解是X=680。
+
+最终答案是：680​。
+```
+
+
+## **实践部署 `浦语·灵笔2` 模型**
+
+
+
+### **1 配置基础环境**
+
+1. 选用 `50% A100` 进行开发
+
+2. 进入开发机，启动 `conda` 环境：
+
+```shell
+conda activate demo
+# 补充环境包
+pip install timm==0.4.12 sentencepiece==0.1.99 markdown2==2.4.10 xlsxwriter==3.1.2 gradio==4.13.0 modelscope==1.9.5
+```
+
+3. 下载 **InternLM-XComposer 仓库** 相关的代码资源：
+
+```shell
+cd /root/demo
+git clone https://gitee.com/internlm/InternLM-XComposer.git
+# git clone https://github.com/internlm/InternLM-XComposer.git
+cd /root/demo/InternLM-XComposer
+git checkout f31220eddca2cf6246ee2ddf8e375a40457ff626
+```
+
+4. 在 `terminal` 中输入指令，构造软链接快捷访问方式：
+
+```shell
+ln -s /root/share/new_models/Shanghai_AI_Laboratory/internlm-xcomposer2-7b /root/models/internlm-xcomposer2-7b
+ln -s /root/share/new_models/Shanghai_AI_Laboratory/internlm-xcomposer2-vl-7b /root/models/internlm-xcomposer2-vl-7b
+```
+
+
+###  **2 图文写作实战**
+
+1. 继续输入指令，用于启动 `InternLM-XComposer`：
+
+```shell
+cd /root/demo/InternLM-XComposer
+python /root/demo/InternLM-XComposer/examples/gradio_demo_composition.py  \
+--code_path /root/models/internlm-xcomposer2-7b \
+--private \
+--num_gpus 1 \
+--port 6006
+```
+
+>  设置端口映射
+
+###  **3 图片理解实战**
+
+1. 关闭并重新启动一个新的 `terminal`，继续输入指令，启动 `InternLM-XComposer2-vl`：
+
+```shell
+
+(base) root@intern-studio-50051794:~/demo# conda activate demo
+(demo) root@intern-studio-50051794:~/demo# cd /root/demo/InternLM-XComposer
+(demo) root@intern-studio-50051794:~/demo/InternLM-XComposer# python /root/demo/InternLM-XComposer/examples/gradio_demo_chat.py  \
+> --code_path /root/models/internlm-xcomposer2-vl-7b \
+> --private \
+> --num_gpus 1 \
+> --port 6006
+You are using a model of type internlmxcomposer2 to instantiate a model of type internlm. This is not supported for all configurations of models and can yield errors.
+Set max length to 4096
+2024-04-06 15:48:57,509 - modelscope - INFO - PyTorch version 2.0.1 Found.
+2024-04-06 15:48:57,513 - modelscope - INFO - Loading ast index from /root/.cache/modelscope/ast_indexer
+2024-04-06 15:49:00,255 - modelscope - INFO - Loading done! Current index file version is 1.9.5, with md5 0910f1e486bf33d495af0c29998ad3d0 and a total number of 945 components indexed
+Position interpolate from 24x24 to 35x35
+Loading checkpoint shards: 100%|███████████████████████████████████████████████████████████| 2/2 [01:14<00:00, 37.25s/it]
+Some weights of InternLMXComposer2ForCausalLM were not initialized from the model checkpoint at /root/models/internlm-xcomposer2-vl-7b and are newly initialized: ['vit.vision_tower.vision_model.post_layernorm.weight', 'vit.vision_tower.vision_model.post_layernorm.bias']
+You should probably TRAIN this model on a down-stream task to be able to use it for predictions and inference.
+Running on local URL:  http://127.0.0.1:6006
+
+To create a public link, set `share=True` in `launch()`.
+```
+
+
+2. 打开 [http://127.0.0.1:6006](http://127.0.0.1:6006/) (上传图片后) 键入内容示例如下：
+
+```
+请分析一下图中内容
+```
+
+
