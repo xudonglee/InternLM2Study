@@ -92,27 +92,7 @@ pip install -e '.[all]'
 	 如下所示：
 	 ```shell
 	 (xtuner0.1.17) root@intern-studio-50051794:/opt/jupyterlab# xtuner chat /root/ft/model --prompt-template internlm2_chat
-[2024-04-14 16:39:21,817] [INFO] [real_accelerator.py:191:get_accelerator] Setting ds_accelerator to cuda (auto detect)
-Error: mkl-service + Intel(R) MKL: MKL_THREADING_LAYER=INTEL is incompatible with libgomp.so.1 library.
-        Try to import numpy first or set the threading layer accordingly. Set MKL_SERVICE_FORCE_INTEL to force it.
-[2024-04-14 16:40:02,214] [INFO] [real_accelerator.py:191:get_accelerator] Setting ds_accelerator to cuda (auto detect)
-Traceback (most recent call last):
-  File "/root/xtuner0117/xtuner/xtuner/tools/chat.py", line 491, in <module>
-    main()
-  File "/root/xtuner0117/xtuner/xtuner/tools/chat.py", line 235, in main
-    llm = AutoModelForCausalLM.from_pretrained(args.model_name_or_path,
-  File "/root/.conda/envs/xtuner0.1.17/lib/python3.10/site-packages/transformers/models/auto/auto_factory.py", line 523, in from_pretrained
-    config, kwargs = AutoConfig.from_pretrained(
-  File "/root/.conda/envs/xtuner0.1.17/lib/python3.10/site-packages/transformers/models/auto/configuration_auto.py", line 1138, in from_pretrained
-    config_dict, unused_kwargs = PretrainedConfig.get_config_dict(pretrained_model_name_or_path, **kwargs)
-  File "/root/.conda/envs/xtuner0.1.17/lib/python3.10/site-packages/transformers/configuration_utils.py", line 631, in get_config_dict
-    config_dict, kwargs = cls._get_config_dict(pretrained_model_name_or_path, **kwargs)
-  File "/root/.conda/envs/xtuner0.1.17/lib/python3.10/site-packages/transformers/configuration_utils.py", line 686, in _get_config_dict
-    resolved_config_file = cached_file(
-  File "/root/.conda/envs/xtuner0.1.17/lib/python3.10/site-packages/transformers/utils/hub.py", line 369, in cached_file
-    raise EnvironmentError(
 OSError: /root/ft/model does not appear to have a file named config.json. Checkout 'https://huggingface.co//root/ft/model/tree/None' for available files.
-(xtuner0.1.17) root@intern-studio-50051794:/opt/jupyterlab# xtuner chat /root/ft/model/internlm2-chat-1_8b --prompt-template internlm2_chat
 ```
 	 
 3. 配置文件准备
