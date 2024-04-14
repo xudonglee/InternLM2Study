@@ -89,11 +89,8 @@ pip install -e '.[all]'
 	为了微调的效率和尽量占用少的资源，使用 InternLM 最新推出的小模型 `InterLM-chat-1.8B` 来完成此次的微调，通过符号链接的方式链接到模型文件，这样既节省了空间，也便于管理。
 	 > 注意后续使用的时候，模型的目录/root/ft/model/internlm2-chat-1_8b/，否则会提示找不到config.json文件
 	 
-	 如下所示：
-	 ```shell
-	 (xtuner0.1.17) root@intern-studio-50051794:/opt/jupyterlab# xtuner chat /root/ft/model --prompt-template internlm2_chat
-OSError: /root/ft/model does not appear to have a file named config.json. Checkout 'https://huggingface.co//root/ft/model/tree/None' for available files.
-```
+	 **如下所示**：
+> OSError: /root/ft/model does not appear to have a file named config.json. Checkout 'https://huggingface.co//root/ft/model/tree/None' for available files.
 	 
 3. 配置文件准备
 	XTuner 提供多个开箱即用的配置文件，可以通过下列命令查看：
