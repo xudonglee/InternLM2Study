@@ -1,4 +1,4 @@
-Lesson4 Homework
+# Lesson4 Homework
 
 本节课体验了使用Xtuner进行微调，虽然数据集很简单，但是流程是一样的。最重要的一段话如下：
 
@@ -92,7 +92,7 @@ pip install -e '.[all]'
 	 如下所示：
 	 ```shell
 	 (xtuner0.1.17) root@intern-studio-50051794:/opt/jupyterlab# xtuner chat /root/ft/model --prompt-template internlm2_chat
-^C^C^C^C[2024-04-14 16:39:21,817] [INFO] [real_accelerator.py:191:get_accelerator] Setting ds_accelerator to cuda (auto detect)
+[2024-04-14 16:39:21,817] [INFO] [real_accelerator.py:191:get_accelerator] Setting ds_accelerator to cuda (auto detect)
 Error: mkl-service + Intel(R) MKL: MKL_THREADING_LAYER=INTEL is incompatible with libgomp.so.1 library.
         Try to import numpy first or set the threading layer accordingly. Set MKL_SERVICE_FORCE_INTEL to force it.
 [2024-04-14 16:40:02,214] [INFO] [real_accelerator.py:191:get_accelerator] Setting ds_accelerator to cuda (auto detect)
